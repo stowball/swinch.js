@@ -19,12 +19,12 @@ var swipeElem = new swinch(document.getElementById('swipe-elem'), {
 });
 ```
 
-The sensitivity of the swipe can be adjusted per instance with `thresholdDuration` (default: 50 [ms]) and `thresholdDuration` (default: 30 [px]) options. For example:
+The sensitivity of the swipe can be adjusted per instance with `thresholdDuration` (default: 50 [ms]) and `thresholdDistance` (default: 30 [px]) options. For example:
 
 ```js
 var swipeElem = new swinch(document.getElementById('swipe-elem'), {
   thresholdDuration: 150,
-  thresholdDuration: 100,
+  thresholdDistance: 100,
   
   callback: function(direction) {
   }
