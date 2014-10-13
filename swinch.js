@@ -1,5 +1,5 @@
 /*!
- * swinch v0.0.1
+ * swinch v0.1.0
  *
  * A lightweight, customisable, horizontal touch detection script
  *
@@ -16,7 +16,8 @@
 	this.options = options || {};
 	this.thresholdDuration = this.options.thresholdDuration || 50;
 	this.thresholdDistance = this.options.thresholdDistance || 30;
-	this.callback = this.options.callback || function() {};
+	this.onMove = this.options.onMove || function() {};
+	this.onEnd = this.options.onEnd || function() {};
 	
 	if (elem.addEventListener) {
 		elem.addEventListener('touchstart', this, false);
@@ -63,6 +64,8 @@ swinch.prototype = {
 		if (!this.isScrolling) {
 			e.preventDefault();
 			e.stopPropagation();
+			
+			this.onMove(this.deltaX);
 		}
 	},
 	
@@ -70,7 +73,7 @@ swinch.prototype = {
 		var isValid = Number(new Date()) - this.start.time > this.thresholdDuration && Math.abs(this.deltaX) > this.thresholdDistance;
 
 		if (!this.isScrolling && isValid) {
-			this.callback(this.deltaX < 0 ? 'left' : 'right');
+			this.onEnd(this.deltaX < 0 ? 'left' : 'right');
 		}
 
 		e.stopPropagation();

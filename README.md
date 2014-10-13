@@ -2,13 +2,17 @@
 
 ## A lightweight, customisable, horizontal touch detection script
 
-swinch is a vanilla JavaScript plugin that detects horizontal swipes on the element you pass to it, and provides a callback with the direction of the swipe.
+swinch is a vanilla JavaScript plugin that detects horizontal swipes on the element you pass to it, and provides callbacks with the distance travelled during the swipe, and the direction of the swipe at the end.
 
 ### Usage
 
 ```js
 var swipeElem = new swinch(document.getElementById('swipe-elem'), {
-  callback: function(direction) {
+  onMove: function(distance) {
+    // you could easily translate the element 1:1 using distance
+  },
+  
+  onEnd: function(direction) {
     if (direction === 'left') {
       doSomethingOnLeft();
     }
@@ -26,7 +30,10 @@ var swipeElem = new swinch(document.getElementById('swipe-elem'), {
   thresholdDuration: 150,
   thresholdDistance: 100,
   
-  callback: function(direction) {
+  onMove: function(distance) {
+  },
+  
+  onEnd: function(direction) {
   }
 });
 ```
